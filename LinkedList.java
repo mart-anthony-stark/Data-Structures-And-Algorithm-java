@@ -1,3 +1,5 @@
+import java.util.*;
+
 public class LinkedList{
   private class Node{
     private int value;
@@ -50,6 +52,43 @@ public class LinkedList{
 
   public boolean contains(int item){
     return indexOf(item) != -1;
+  }
+
+  public void removeFirst(){
+    if(isEmpty())
+      throw new NoSuchElementException();
+
+    if(first == last){
+      first = last = null;
+      return;
+    }
+
+    var second = first.next;
+    first.next = null;
+    first = second;
+  }
+
+  public void removeLast(){
+    if(isEmpty())
+      throw new NoSuchElementException();
+
+    if(first == last){
+      first = last = null;
+      return;
+    }
+
+    var previous = getPrevious(last);
+    last = previous;
+    last.next = null;
+  }
+
+  private Node getPrevious(Node node){
+    var current = first;
+    while(current != null){
+      if(current.next == node) return current;
+      current = current.next;
+    }
+    return null;
   }
 }
 // kl;j:
